@@ -25,6 +25,7 @@ namespace CodeTemplater
 	public partial class MainForm : Form
 	{
 		protected DbConnection _conn;
+		protected Dictionary<string, long> _dictScriptId;
 		
 		public MainForm()
 		{
@@ -34,6 +35,9 @@ namespace CodeTemplater
 			InitializeComponent();
 			
 			initDatabase();
+			
+			initScriptCombo();
+			
 		}
 		
 		protected void initDatabase()
@@ -41,7 +45,22 @@ namespace CodeTemplater
 			string connectString = @"Data Source=appdata.db3;Pooling=true;FailIfMissing=false";
 			DbConnection.Initialise( connectString, Assembly.GetExecutingAssembly() );
 			_conn = new DbConnection();
+			
 		}
+		
+		protected void initScriptCombo()
+		{
+			_dictScriptId = new Dictionary<string, long>();
+			using (TableAdapter<CodeTemplater.Model.Script> adapter =
+			       TableAdapter<CodeTemplater.Model.Script>.Open())
+			{
+				foreach (CodeTemplater.Model.Script item in adapter.Select()) {
+					tcmbScript.Items.Add( item.title );
+					_dictScriptId[item.title] = item.id;
+				}
+			}
+		}
+		
 		
 		/// <summary>
 		/// 转换文本数据
@@ -63,8 +82,12 @@ namespace CodeTemplater
 		
 		protected string _runTemplate(List<List<string>> data, string script)
 		{
+			JScriptManager.AddGlobalInstance("dataContainer", new DataContainer(data));
 			object ret = JScriptManager.run(script);
-			return ret.ToString();
+			if (ret == null)
+				return "";
+			else
+				return ret.ToString();
 		}
 		
 		void TbtnRunTemplateClick(object sender, EventArgs e)
@@ -74,17 +97,35 @@ namespace CodeTemplater
 			string scripts = txtScript.Text;
 			
 			List<List<string>> rows = _parseData(dataStr, colSep);
-			
 			txtResult.Text = _runTemplate(rows, scripts);
+			try {
+				
+			} catch (Exception ex) 
+			{
+				MessageBox.Show(ex.StackTrace, ex.Message);
+			}
+			
 			
 		}
-				
+		
 		void TbtnScriptSaveClick(object sender, System.EventArgs e)
 		{
-			Script item = new Script();
+			CodeTemplater.Model.Script item = new CodeTemplater.Model.Script();
 			item.title = tcmbScript.Text;
-			item.content = txtScript.Text;
+			item.content = txtScript.Rtf;
 			item.Save();
+		}
+		
+		void TcmbScriptSelectedIndexChanged(object sender, EventArgs e)
+		{
+			string title = (string)tcmbScript.SelectedItem;
+			if (!_dictScriptId.ContainsKey(title))
+				return;
+			long id = _dictScriptId[title];
+			CodeTemplater.Model.Script item = CodeTemplater.Model.Script.Read(id);
+			if (item == null)
+				return;
+			txtScript.Rtf = item.content;
 		}
 	}
 }

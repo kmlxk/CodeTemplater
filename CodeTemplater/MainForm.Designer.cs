@@ -148,6 +148,7 @@ namespace CodeTemplater
 			this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.txtData.Size = new System.Drawing.Size(444, 216);
 			this.txtData.TabIndex = 0;
+			this.txtData.Text = "id\tID\r\nuseragent\t浏览器\r\nip\tIP\r\nmodule\t模块\r\ndata\t数据\r\ncreated\t创建日期\r\nupdated\t修改日期";
 			// 
 			// panel1
 			// 
@@ -221,6 +222,7 @@ namespace CodeTemplater
 			// 
 			this.tcmbScript.Name = "tcmbScript";
 			this.tcmbScript.Size = new System.Drawing.Size(121, 25);
+			this.tcmbScript.SelectedIndexChanged += new System.EventHandler(this.TcmbScriptSelectedIndexChanged);
 			// 
 			// toolStripSeparator1
 			// 
