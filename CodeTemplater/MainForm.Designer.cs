@@ -36,11 +36,8 @@ namespace CodeTemplater
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.tbtnRunTemplate = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -52,20 +49,24 @@ namespace CodeTemplater
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.txtResult = new System.Windows.Forms.TextBox();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.panel5 = new System.Windows.Forms.Panel();
+			this.txtScript = new System.Windows.Forms.RichTextBox();
 			this.toolStrip1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.panel1.SuspendLayout();
+			this.tabPage2.SuspendLayout();
+			this.tabPage3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.tbtnRunTemplate,
-									this.toolStripButton2,
-									this.toolStripButton3});
+									this.tbtnRunTemplate});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(458, 25);
@@ -74,30 +75,11 @@ namespace CodeTemplater
 			// 
 			// tbtnRunTemplate
 			// 
-			this.tbtnRunTemplate.Image = ((System.Drawing.Image)(resources.GetObject("tbtnRunTemplate.Image")));
 			this.tbtnRunTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbtnRunTemplate.Name = "tbtnRunTemplate";
-			this.tbtnRunTemplate.Size = new System.Drawing.Size(76, 22);
+			this.tbtnRunTemplate.Size = new System.Drawing.Size(60, 22);
 			this.tbtnRunTemplate.Text = "模板替换";
 			this.tbtnRunTemplate.Click += new System.EventHandler(this.TbtnRunTemplateClick);
-			// 
-			// toolStripButton2
-			// 
-			this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-			this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton2.Name = "toolStripButton2";
-			this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton2.Text = "toolStripButton2";
-			// 
-			// toolStripButton3
-			// 
-			this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-			this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton3.Name = "toolStripButton3";
-			this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton3.Text = "toolStripButton3";
 			// 
 			// statusStrip1
 			// 
@@ -187,6 +169,8 @@ namespace CodeTemplater
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.txtScript);
+			this.tabPage2.Controls.Add(this.panel5);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -197,6 +181,8 @@ namespace CodeTemplater
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.txtResult);
+			this.tabPage3.Controls.Add(this.panel4);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -204,6 +190,41 @@ namespace CodeTemplater
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "替换结果";
 			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// txtResult
+			// 
+			this.txtResult.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtResult.Location = new System.Drawing.Point(3, 51);
+			this.txtResult.Multiline = true;
+			this.txtResult.Name = "txtResult";
+			this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.txtResult.Size = new System.Drawing.Size(444, 213);
+			this.txtResult.TabIndex = 1;
+			// 
+			// panel4
+			// 
+			this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel4.Location = new System.Drawing.Point(3, 3);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(444, 48);
+			this.panel4.TabIndex = 0;
+			// 
+			// panel5
+			// 
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel5.Location = new System.Drawing.Point(3, 3);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(444, 65);
+			this.panel5.TabIndex = 0;
+			// 
+			// txtScript
+			// 
+			this.txtScript.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtScript.Location = new System.Drawing.Point(3, 68);
+			this.txtScript.Name = "txtScript";
+			this.txtScript.Size = new System.Drawing.Size(444, 196);
+			this.txtScript.TabIndex = 1;
+			this.txtScript.Text = "";
 			// 
 			// MainForm
 			// 
@@ -224,9 +245,16 @@ namespace CodeTemplater
 			this.panel3.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.tabPage2.ResumeLayout(false);
+			this.tabPage3.ResumeLayout(false);
+			this.tabPage3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Panel panel5;
+		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.TextBox txtResult;
+		private System.Windows.Forms.RichTextBox txtScript;
 		private System.Windows.Forms.TextBox txtData;
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.TabPage tabPage2;
@@ -236,8 +264,6 @@ namespace CodeTemplater
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.ToolStripButton toolStripButton3;
-		private System.Windows.Forms.ToolStripButton toolStripButton2;
 		private System.Windows.Forms.ToolStripButton tbtnRunTemplate;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStrip toolStrip1;

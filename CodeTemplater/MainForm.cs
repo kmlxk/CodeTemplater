@@ -11,14 +11,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
+using Efreda.Script;
 
 namespace CodeTemplater
 {
+		
 	/// <summary>
 	/// Description of MainForm.
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		
 		public MainForm()
 		{
 			//
@@ -40,21 +43,31 @@ namespace CodeTemplater
 		protected List<List<string>> _parseData(string data, string colSep)
 		{
 			data = data.Replace("\r", "");
-			string[] lines = data.Split("\n");
+			string[] lines = data.Split('\n');
 			List<List<string>> ret = new List<List<string>>();
 			foreach (string line in lines) {
-				string[] cols = line.Split(colSep);
+				string[] cols = line.Split(new string[]{colSep}, StringSplitOptions.None);
 				ret.Add(cols.ToList());
 			}
 			return ret;
+		}
+		
+		protected string _runTemplate(List<List<string>> data, string script)
+		{
+			object ret = JScriptManager.run(script);
+			return ret.ToString();
 		}
 		
 		void TbtnRunTemplateClick(object sender, EventArgs e)
 		{
 			string dataStr = txtData.Text;
 			string colSep = txtColumnSpliter.Text;
+			string scripts = txtScript.Text;
 			
 			List<List<string>> rows = _parseData(dataStr, colSep);
+			
+			txtResult.Text = _runTemplate(rows, scripts);
+				
 		}
 	}
 }
