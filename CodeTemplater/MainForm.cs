@@ -24,6 +24,7 @@ namespace CodeTemplater
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		protected DbConnection _conn;
 		
 		public MainForm()
 		{
@@ -32,9 +33,14 @@ namespace CodeTemplater
 			//
 			InitializeComponent();
 			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
+			initDatabase();
+		}
+		
+		protected void initDatabase()
+		{
+			string connectString = @"Data Source=appdata.db3;Pooling=true;FailIfMissing=false";
+			DbConnection.Initialise( connectString, Assembly.GetExecutingAssembly() );
+			_conn = new DbConnection();
 		}
 		
 		/// <summary>
@@ -61,24 +67,6 @@ namespace CodeTemplater
 			return ret.ToString();
 		}
 		
-		protected void _testOrm()
-		{
-			string connectString = @"Data Source=appdata.db3;Pooling=true;FailIfMissing=false";
-			string connStrMem = "Data Source=:memory:";
-			DbConnection.Initialise( connectString, Assembly.GetExecutingAssembly() );
-			// Static connection keeps the connection open for entire group of operations
-			using (DbConnection conn = new DbConnection())
-			{
-				// Using TableBase defined in Demo.Model.
-				// Note, SimpleTable derives from TableBase<SimpleTable>
-				
-				// CREATE
-				SimpleTable simple = new SimpleTable() { Id = 5, Test = "Hello", When = DateTime.UtcNow };
-				simple.Save();
-				System.Diagnostics.Debug.WriteLine( "Simple[5]: Test='" + SimpleTable.Read( 5 ).Test + "'" );
-			}
-		}
-		
 		void TbtnRunTemplateClick(object sender, EventArgs e)
 		{
 			string dataStr = txtData.Text;
@@ -90,10 +78,13 @@ namespace CodeTemplater
 			txtResult.Text = _runTemplate(rows, scripts);
 			
 		}
-		
-		void TbtnTestClick(object sender, EventArgs e)
+				
+		void TbtnScriptSaveClick(object sender, System.EventArgs e)
 		{
-			_testOrm();
+			Script item = new Script();
+			item.title = tcmbScript.Text;
+			item.content = txtScript.Text;
+			item.Save();
 		}
 	}
 }

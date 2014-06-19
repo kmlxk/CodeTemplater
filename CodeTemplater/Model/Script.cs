@@ -11,7 +11,7 @@ using SqliteORM;
 namespace CodeTemplater.Model
 {
 	[Table]
-	public class Script : TableBase<SimpleTable>
+	public class Script : TableBase<Script>
 	{
 		[PrimaryKey]
 		public long id { get; set; }

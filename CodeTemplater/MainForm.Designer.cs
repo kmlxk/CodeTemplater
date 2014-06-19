@@ -26,6 +26,7 @@ namespace CodeTemplater
 					components.Dispose();
 				}
 			}
+			_conn.Dispose();
 			base.Dispose(disposing);
 		}
 		
@@ -51,10 +52,13 @@ namespace CodeTemplater
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.txtScript = new System.Windows.Forms.RichTextBox();
 			this.panel5 = new System.Windows.Forms.Panel();
+			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+			this.tcmbScript = new System.Windows.Forms.ToolStripComboBox();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.tbtnScriptSave = new System.Windows.Forms.ToolStripButton();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.txtResult = new System.Windows.Forms.TextBox();
 			this.panel4 = new System.Windows.Forms.Panel();
-			this.tbtnTest = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -62,14 +66,15 @@ namespace CodeTemplater
 			this.panel3.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
+			this.panel5.SuspendLayout();
+			this.toolStrip2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.tbtnRunTemplate,
-									this.tbtnTest});
+									this.tbtnRunTemplate});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(458, 25);
@@ -185,19 +190,52 @@ namespace CodeTemplater
 			// txtScript
 			// 
 			this.txtScript.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtScript.Location = new System.Drawing.Point(3, 68);
+			this.txtScript.Location = new System.Drawing.Point(3, 32);
 			this.txtScript.Name = "txtScript";
-			this.txtScript.Size = new System.Drawing.Size(444, 196);
+			this.txtScript.Size = new System.Drawing.Size(444, 232);
 			this.txtScript.TabIndex = 1;
 			this.txtScript.Text = "";
 			// 
 			// panel5
 			// 
+			this.panel5.Controls.Add(this.toolStrip2);
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel5.Location = new System.Drawing.Point(3, 3);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(444, 65);
+			this.panel5.Size = new System.Drawing.Size(444, 29);
 			this.panel5.TabIndex = 0;
+			// 
+			// toolStrip2
+			// 
+			this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+									this.tcmbScript,
+									this.toolStripSeparator1,
+									this.tbtnScriptSave});
+			this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip2.Name = "toolStrip2";
+			this.toolStrip2.Size = new System.Drawing.Size(444, 25);
+			this.toolStrip2.TabIndex = 0;
+			this.toolStrip2.Text = "toolStrip2";
+			// 
+			// tcmbScript
+			// 
+			this.tcmbScript.Name = "tcmbScript";
+			this.tcmbScript.Size = new System.Drawing.Size(121, 25);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// tbtnScriptSave
+			// 
+			this.tbtnScriptSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.tbtnScriptSave.Image = ((System.Drawing.Image)(resources.GetObject("tbtnScriptSave.Image")));
+			this.tbtnScriptSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tbtnScriptSave.Name = "tbtnScriptSave";
+			this.tbtnScriptSave.Size = new System.Drawing.Size(36, 22);
+			this.tbtnScriptSave.Text = "保存";
+			this.tbtnScriptSave.Click += new System.EventHandler(this.TbtnScriptSaveClick);
 			// 
 			// tabPage3
 			// 
@@ -229,16 +267,6 @@ namespace CodeTemplater
 			this.panel4.Size = new System.Drawing.Size(444, 48);
 			this.panel4.TabIndex = 0;
 			// 
-			// tbtnTest
-			// 
-			this.tbtnTest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.tbtnTest.Image = ((System.Drawing.Image)(resources.GetObject("tbtnTest.Image")));
-			this.tbtnTest.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tbtnTest.Name = "tbtnTest";
-			this.tbtnTest.Size = new System.Drawing.Size(33, 22);
-			this.tbtnTest.Text = "test";
-			this.tbtnTest.Click += new System.EventHandler(this.TbtnTestClick);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -259,12 +287,19 @@ namespace CodeTemplater
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.tabPage2.ResumeLayout(false);
+			this.panel5.ResumeLayout(false);
+			this.panel5.PerformLayout();
+			this.toolStrip2.ResumeLayout(false);
+			this.toolStrip2.PerformLayout();
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
-		private System.Windows.Forms.ToolStripButton tbtnTest;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripButton tbtnScriptSave;
+		private System.Windows.Forms.ToolStripComboBox tcmbScript;
+		private System.Windows.Forms.ToolStrip toolStrip2;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.TextBox txtResult;
@@ -282,5 +317,6 @@ namespace CodeTemplater
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.Panel panel1;
+
 	}
 }
