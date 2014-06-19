@@ -36,6 +36,7 @@ namespace CodeTemplater
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.tbtnRunTemplate = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -48,11 +49,12 @@ namespace CodeTemplater
 			this.txtColumnSpliter = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.txtScript = new System.Windows.Forms.RichTextBox();
+			this.panel5 = new System.Windows.Forms.Panel();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.txtResult = new System.Windows.Forms.TextBox();
 			this.panel4 = new System.Windows.Forms.Panel();
-			this.panel5 = new System.Windows.Forms.Panel();
-			this.txtScript = new System.Windows.Forms.RichTextBox();
+			this.tbtnTest = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -66,7 +68,8 @@ namespace CodeTemplater
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.tbtnRunTemplate});
+									this.tbtnRunTemplate,
+									this.tbtnTest});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(458, 25);
@@ -179,6 +182,23 @@ namespace CodeTemplater
 			this.tabPage2.Text = "模板代码";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
+			// txtScript
+			// 
+			this.txtScript.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtScript.Location = new System.Drawing.Point(3, 68);
+			this.txtScript.Name = "txtScript";
+			this.txtScript.Size = new System.Drawing.Size(444, 196);
+			this.txtScript.TabIndex = 1;
+			this.txtScript.Text = "";
+			// 
+			// panel5
+			// 
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel5.Location = new System.Drawing.Point(3, 3);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(444, 65);
+			this.panel5.TabIndex = 0;
+			// 
 			// tabPage3
 			// 
 			this.tabPage3.Controls.Add(this.txtResult);
@@ -209,22 +229,15 @@ namespace CodeTemplater
 			this.panel4.Size = new System.Drawing.Size(444, 48);
 			this.panel4.TabIndex = 0;
 			// 
-			// panel5
+			// tbtnTest
 			// 
-			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel5.Location = new System.Drawing.Point(3, 3);
-			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(444, 65);
-			this.panel5.TabIndex = 0;
-			// 
-			// txtScript
-			// 
-			this.txtScript.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.txtScript.Location = new System.Drawing.Point(3, 68);
-			this.txtScript.Name = "txtScript";
-			this.txtScript.Size = new System.Drawing.Size(444, 196);
-			this.txtScript.TabIndex = 1;
-			this.txtScript.Text = "";
+			this.tbtnTest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.tbtnTest.Image = ((System.Drawing.Image)(resources.GetObject("tbtnTest.Image")));
+			this.tbtnTest.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tbtnTest.Name = "tbtnTest";
+			this.tbtnTest.Size = new System.Drawing.Size(33, 22);
+			this.tbtnTest.Text = "test";
+			this.tbtnTest.Click += new System.EventHandler(this.TbtnTestClick);
 			// 
 			// MainForm
 			// 
@@ -251,6 +264,7 @@ namespace CodeTemplater
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripButton tbtnTest;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.TextBox txtResult;
