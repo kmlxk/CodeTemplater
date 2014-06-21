@@ -10,11 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Linq;
-using Efreda.Script;
 using SqliteORM;
 using System.Reflection;
 using CodeTemplater.Model;
+using CodeTemplaterLib;
 
 namespace CodeTemplater
 {
@@ -61,43 +60,14 @@ namespace CodeTemplater
 			}
 		}
 		
-		
-		/// <summary>
-		/// 转换文本数据
-		/// </summary>
-		/// <param name="data"></param>
-		/// <param name="colSep"></param>
-		/// <returns></returns>
-		protected List<List<string>> _parseData(string data, string colSep)
-		{
-			data = data.Replace("\r", "");
-			string[] lines = data.Split('\n');
-			List<List<string>> ret = new List<List<string>>();
-			foreach (string line in lines) {
-				string[] cols = line.Split(new string[]{colSep}, StringSplitOptions.None);
-				ret.Add(cols.ToList());
-			}
-			return ret;
-		}
-		
-		protected string _runTemplate(List<List<string>> data, string script)
-		{
-			JScriptManager.AddGlobalInstance("dataContainer", new DataContainer(data));
-			object ret = JScriptManager.run(script);
-			if (ret == null)
-				return "";
-			else
-				return ret.ToString();
-		}
-		
 		void TbtnRunTemplateClick(object sender, EventArgs e)
 		{
 			string dataStr = txtData.Text;
 			string colSep = txtColumnSpliter.Text;
 			string scripts = txtScript.Text;
 			
-			List<List<string>> rows = _parseData(dataStr, colSep);
-			txtResult.Text = _runTemplate(rows, scripts);
+			string[][] rows = DataParser.parseCvs(dataStr, colSep);
+			txtResult.Text = TemplateParser.run(rows, scripts);
 			try {
 				
 			} catch (Exception ex) 
@@ -126,6 +96,28 @@ namespace CodeTemplater
 			if (item == null)
 				return;
 			txtScript.Rtf = item.content;
+		}
+		
+		void TxtDataKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
+            {
+                ((TextBox)sender).SelectAll();
+            }
+		}
+		
+		void TxtResultKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
+            {
+                ((TextBox)sender).SelectAll();
+            }
+		}
+		
+		void TbtnCopyResultClick(object sender, EventArgs e)
+		{
+			txtResult.SelectAll();
+			txtResult.Copy();
 		}
 	}
 }
