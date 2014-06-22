@@ -30,6 +30,10 @@ namespace CodeTemplaterLib
 		/// <returns></returns>
 		public static string[][] parseCvs(string data, string colSep)
 		{
+			// 默认列分隔符
+			if (colSep == null || colSep.Length == 0) {
+				colSep = "\t";
+			}
 			data = data.Replace("\r", "");
 			string[] lines = data.Split('\n');
 			string[][] retArray = new string[lines.Length][];

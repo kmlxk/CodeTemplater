@@ -47,37 +47,38 @@ namespace CodeTemplater
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.txtData = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+			this.tbtnPasteData = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+			this.txtColumnSpliter = new System.Windows.Forms.ToolStripTextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.txtScript = new System.Windows.Forms.RichTextBox();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
 			this.tcmbScript = new System.Windows.Forms.ToolStripComboBox();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbtnScriptSave = new System.Windows.Forms.ToolStripButton();
+			this.tbtnScriptDelete = new System.Windows.Forms.ToolStripButton();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.txtResult = new System.Windows.Forms.TextBox();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.toolStrip3 = new System.Windows.Forms.ToolStrip();
 			this.tbtnCopyResult = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-			this.tbtnPasteData = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.txtColumnSpliter = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStrip1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.panel1.SuspendLayout();
+			this.toolStrip4.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.toolStrip3.SuspendLayout();
-			this.toolStrip4.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -135,7 +136,7 @@ namespace CodeTemplater
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(450, 267);
+			this.tabPage1.Size = new System.Drawing.Size(543, 327);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "数据";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -146,7 +147,7 @@ namespace CodeTemplater
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(3, 30);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(444, 234);
+			this.panel3.Size = new System.Drawing.Size(537, 294);
 			this.panel3.TabIndex = 1;
 			// 
 			// txtData
@@ -156,7 +157,7 @@ namespace CodeTemplater
 			this.txtData.Multiline = true;
 			this.txtData.Name = "txtData";
 			this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.txtData.Size = new System.Drawing.Size(444, 234);
+			this.txtData.Size = new System.Drawing.Size(537, 294);
 			this.txtData.TabIndex = 0;
 			this.txtData.Text = "id\tID\r\nuseragent\t浏览器\r\nip\tIP\r\nmodule\t模块\r\ndata\t数据\r\ncreated\t创建日期\r\nupdated\t修改日期";
 			this.txtData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtDataKeyDown);
@@ -167,8 +168,45 @@ namespace CodeTemplater
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(444, 27);
+			this.panel1.Size = new System.Drawing.Size(537, 27);
 			this.panel1.TabIndex = 0;
+			// 
+			// toolStrip4
+			// 
+			this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+									this.tbtnPasteData,
+									this.toolStripSeparator2,
+									this.toolStripLabel1,
+									this.txtColumnSpliter});
+			this.toolStrip4.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip4.Name = "toolStrip4";
+			this.toolStrip4.Size = new System.Drawing.Size(537, 25);
+			this.toolStrip4.TabIndex = 2;
+			this.toolStrip4.Text = "toolStrip4";
+			// 
+			// tbtnPasteData
+			// 
+			this.tbtnPasteData.Image = ((System.Drawing.Image)(resources.GetObject("tbtnPasteData.Image")));
+			this.tbtnPasteData.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tbtnPasteData.Name = "tbtnPasteData";
+			this.tbtnPasteData.Size = new System.Drawing.Size(52, 22);
+			this.tbtnPasteData.Text = "粘贴";
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+			// 
+			// toolStripLabel1
+			// 
+			this.toolStripLabel1.Name = "toolStripLabel1";
+			this.toolStripLabel1.Size = new System.Drawing.Size(56, 22);
+			this.toolStripLabel1.Text = "列分隔符";
+			// 
+			// txtColumnSpliter
+			// 
+			this.txtColumnSpliter.Name = "txtColumnSpliter";
+			this.txtColumnSpliter.Size = new System.Drawing.Size(100, 25);
 			// 
 			// tabPage2
 			// 
@@ -206,12 +244,19 @@ namespace CodeTemplater
 									this.toolStripLabel2,
 									this.tcmbScript,
 									this.toolStripSeparator1,
-									this.tbtnScriptSave});
+									this.tbtnScriptSave,
+									this.tbtnScriptDelete});
 			this.toolStrip2.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip2.Name = "toolStrip2";
 			this.toolStrip2.Size = new System.Drawing.Size(537, 25);
 			this.toolStrip2.TabIndex = 0;
 			this.toolStrip2.Text = "toolStrip2";
+			// 
+			// toolStripLabel2
+			// 
+			this.toolStripLabel2.Name = "toolStripLabel2";
+			this.toolStripLabel2.Size = new System.Drawing.Size(32, 22);
+			this.toolStripLabel2.Text = "模板";
 			// 
 			// tcmbScript
 			// 
@@ -234,6 +279,15 @@ namespace CodeTemplater
 			this.tbtnScriptSave.Text = "保存";
 			this.tbtnScriptSave.Click += new System.EventHandler(this.TbtnScriptSaveClick);
 			// 
+			// tbtnScriptDelete
+			// 
+			this.tbtnScriptDelete.Image = ((System.Drawing.Image)(resources.GetObject("tbtnScriptDelete.Image")));
+			this.tbtnScriptDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tbtnScriptDelete.Name = "tbtnScriptDelete";
+			this.tbtnScriptDelete.Size = new System.Drawing.Size(52, 22);
+			this.tbtnScriptDelete.Text = "删除";
+			this.tbtnScriptDelete.Click += new System.EventHandler(this.TbtnScriptDeleteClick);
+			// 
 			// tabPage3
 			// 
 			this.tabPage3.Controls.Add(this.txtResult);
@@ -241,7 +295,7 @@ namespace CodeTemplater
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(450, 267);
+			this.tabPage3.Size = new System.Drawing.Size(543, 327);
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "替换结果";
 			this.tabPage3.UseVisualStyleBackColor = true;
@@ -253,7 +307,7 @@ namespace CodeTemplater
 			this.txtResult.Multiline = true;
 			this.txtResult.Name = "txtResult";
 			this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.txtResult.Size = new System.Drawing.Size(444, 232);
+			this.txtResult.Size = new System.Drawing.Size(537, 292);
 			this.txtResult.TabIndex = 1;
 			this.txtResult.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtResultKeyDown);
 			// 
@@ -263,7 +317,7 @@ namespace CodeTemplater
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel4.Location = new System.Drawing.Point(3, 3);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(444, 29);
+			this.panel4.Size = new System.Drawing.Size(537, 29);
 			this.panel4.TabIndex = 0;
 			// 
 			// toolStrip3
@@ -272,7 +326,7 @@ namespace CodeTemplater
 									this.tbtnCopyResult});
 			this.toolStrip3.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip3.Name = "toolStrip3";
-			this.toolStrip3.Size = new System.Drawing.Size(444, 25);
+			this.toolStrip3.Size = new System.Drawing.Size(537, 25);
 			this.toolStrip3.TabIndex = 0;
 			this.toolStrip3.Text = "toolStrip3";
 			// 
@@ -284,49 +338,6 @@ namespace CodeTemplater
 			this.tbtnCopyResult.Size = new System.Drawing.Size(52, 22);
 			this.tbtnCopyResult.Text = "复制";
 			this.tbtnCopyResult.Click += new System.EventHandler(this.TbtnCopyResultClick);
-			// 
-			// toolStrip4
-			// 
-			this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.tbtnPasteData,
-									this.toolStripSeparator2,
-									this.toolStripLabel1,
-									this.txtColumnSpliter});
-			this.toolStrip4.Location = new System.Drawing.Point(0, 0);
-			this.toolStrip4.Name = "toolStrip4";
-			this.toolStrip4.Size = new System.Drawing.Size(444, 25);
-			this.toolStrip4.TabIndex = 2;
-			this.toolStrip4.Text = "toolStrip4";
-			// 
-			// tbtnPasteData
-			// 
-			this.tbtnPasteData.Image = ((System.Drawing.Image)(resources.GetObject("tbtnPasteData.Image")));
-			this.tbtnPasteData.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.tbtnPasteData.Name = "tbtnPasteData";
-			this.tbtnPasteData.Size = new System.Drawing.Size(52, 22);
-			this.tbtnPasteData.Text = "粘贴";
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-			// 
-			// txtColumnSpliter
-			// 
-			this.txtColumnSpliter.Name = "txtColumnSpliter";
-			this.txtColumnSpliter.Size = new System.Drawing.Size(100, 25);
-			// 
-			// toolStripLabel1
-			// 
-			this.toolStripLabel1.Name = "toolStripLabel1";
-			this.toolStripLabel1.Size = new System.Drawing.Size(56, 22);
-			this.toolStripLabel1.Text = "列分隔符";
-			// 
-			// toolStripLabel2
-			// 
-			this.toolStripLabel2.Name = "toolStripLabel2";
-			this.toolStripLabel2.Size = new System.Drawing.Size(32, 22);
-			this.toolStripLabel2.Text = "模板";
 			// 
 			// MainForm
 			// 
@@ -347,6 +358,8 @@ namespace CodeTemplater
 			this.panel3.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.toolStrip4.ResumeLayout(false);
+			this.toolStrip4.PerformLayout();
 			this.tabPage2.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
 			this.panel5.PerformLayout();
@@ -358,11 +371,10 @@ namespace CodeTemplater
 			this.panel4.PerformLayout();
 			this.toolStrip3.ResumeLayout(false);
 			this.toolStrip3.PerformLayout();
-			this.toolStrip4.ResumeLayout(false);
-			this.toolStrip4.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripButton tbtnScriptDelete;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel2;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

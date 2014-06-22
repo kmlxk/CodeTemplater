@@ -33,15 +33,19 @@ namespace CodeTemplater
 			//
 			InitializeComponent();
 			
-			initDatabase();
+			string path = System.Windows.Forms.Application.StartupPath;
+			System.IO.Directory.SetCurrentDirectory(path);
+			string dbfilename = path +"\\appdata.db3";
+			
+			initDatabase(dbfilename);
 			
 			initScriptCombo();
 			
 		}
 		
-		protected void initDatabase()
+		protected void initDatabase(string dbfilename)
 		{
-			string connectString = @"Data Source=appdata.db3;Pooling=true;FailIfMissing=false";
+			string connectString = @"Data Source="+dbfilename+";Pooling=true;FailIfMissing=false";
 			DbConnection.Initialise( connectString, Assembly.GetExecutingAssembly() );
 			_conn = new DbConnection();
 			
@@ -53,7 +57,7 @@ namespace CodeTemplater
 			using (TableAdapter<CodeTemplater.Model.Script> adapter =
 			       TableAdapter<CodeTemplater.Model.Script>.Open())
 			{
-				foreach (CodeTemplater.Model.Script item in adapter.Select()) {
+				foreach (CodeTemplater.Model.Script item in adapter.Select().OrderBy(t=>t.title)) {
 					tcmbScript.Items.Add( item.title );
 					_dictScriptId[item.title] = item.id;
 				}
@@ -66,11 +70,12 @@ namespace CodeTemplater
 			string colSep = txtColumnSpliter.Text;
 			string scripts = txtScript.Text;
 			
-			string[][] rows = DataParser.parseCvs(dataStr, colSep);
-			txtResult.Text = TemplateParser.run(rows, scripts);
 			try {
 				
-			} catch (Exception ex) 
+				string[][] rows = DataParser.parseCvs(dataStr, colSep);
+				txtResult.Text = TemplateParser.run(rows, scripts);
+				tabControl1.SelectedIndex = 2;
+			} catch (Exception ex)
 			{
 				MessageBox.Show(ex.StackTrace, ex.Message);
 			}
@@ -80,10 +85,16 @@ namespace CodeTemplater
 		
 		void TbtnScriptSaveClick(object sender, System.EventArgs e)
 		{
+			
+			// persistence
 			CodeTemplater.Model.Script item = new CodeTemplater.Model.Script();
 			item.title = tcmbScript.Text;
 			item.content = txtScript.Rtf;
 			item.Save();
+			
+			// reload combo
+			tcmbScript.Items.Clear();
+			initScriptCombo();
 		}
 		
 		void TcmbScriptSelectedIndexChanged(object sender, EventArgs e)
@@ -101,23 +112,41 @@ namespace CodeTemplater
 		void TxtDataKeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
-            {
-                ((TextBox)sender).SelectAll();
-            }
+			{
+				((TextBox)sender).SelectAll();
+			}
 		}
 		
 		void TxtResultKeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
-            {
-                ((TextBox)sender).SelectAll();
-            }
+			{
+				((TextBox)sender).SelectAll();
+			}
 		}
 		
 		void TbtnCopyResultClick(object sender, EventArgs e)
 		{
 			txtResult.SelectAll();
 			txtResult.Copy();
+		}
+		
+		void TbtnScriptDeleteClick(object sender, EventArgs e)
+		{
+			// get selected row id
+			string title = (string)tcmbScript.SelectedItem;
+			if (!_dictScriptId.ContainsKey(title))
+				return;
+			long id = _dictScriptId[title];
+			CodeTemplater.Model.Script item = CodeTemplater.Model.Script.Read(id);
+			if (item == null)
+				return;
+			// delete
+			CodeTemplater.Model.Script.Delete(item);
+			
+			// reload combo
+			tcmbScript.Items.Clear();
+			initScriptCombo();
 		}
 	}
 }
