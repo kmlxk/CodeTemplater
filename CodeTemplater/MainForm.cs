@@ -148,5 +148,47 @@ namespace CodeTemplater
 			tcmbScript.Items.Clear();
 			initScriptCombo();
 		}
+		
+		
+		void TcmbCodeSnippetSelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			object item = tcmbCodeSnippet.SelectedItem;
+			if (item == null)
+				return;
+			txtScript.SelectedText = item.ToString();
+		}
+		
+		public void fillDataGridView(DataGridView datagrid, string[][] rows)
+		{
+			int maxCol = 0;
+			foreach (string[] row in rows) {
+				if (maxCol < row.Length) {
+					maxCol = row.Length;
+				}
+			}
+			for (int i = 0; i < maxCol; i++) {
+				string colName = "row["+i+"]";
+				datagrid.Columns.Add(colName, colName);
+			}
+			foreach (string[] row in rows) {
+				int rowId = datagrid.Rows.Add();
+				for (int i = 0; i < row.Length; i++) {
+					datagrid.Rows[rowId].Cells[i].Value = row[i];
+				}
+			}
+		}
+		
+		void TbtnConvertDategridClick(object sender, EventArgs e)
+		{
+			string dataStr = txtData.Text;
+			string colSep = txtColumnSpliter.Text;
+			
+			string[][] rows = DataParser.parseCvs(dataStr, colSep);
+			
+			dataGridView1.Rows.Clear();
+			dataGridView1.Columns.Clear();
+			
+			fillDataGridView(dataGridView1, rows);
+		}
 	}
 }
