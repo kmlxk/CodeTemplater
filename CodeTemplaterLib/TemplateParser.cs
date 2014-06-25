@@ -49,10 +49,8 @@ namespace CodeTemplaterLib
 				string script = m.Groups[1].Value;
 				object ret = JScriptManager.run(script);
 				sb.Append(template.Substring(lastIndex, m.Index - lastIndex));
-				Console.WriteLine("substr("+lastIndex+","+(m.Index - lastIndex)+")");
 				sb.Append(ret);
 				lastIndex = m.Index + m.Length;
-				Console.WriteLine("script: "+script+", ret:" + ret + ", current out:" + sb.ToString());
 			}
 			sb.Append(template.Substring(lastIndex));
 			return sb.ToString();

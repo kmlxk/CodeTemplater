@@ -38,6 +38,7 @@ namespace CodeTemplater
 			string dbfilename = path +"\\appdata.db3";
 			
 			initDatabase(dbfilename);
+			initConfigCombos();
 			
 			initScriptCombo();
 			
@@ -64,23 +65,47 @@ namespace CodeTemplater
 			}
 		}
 		
-		void TbtnRunTemplateClick(object sender, EventArgs e)
+		protected void initConfigCombos()
+		{
+			using (TableAdapter<CodeTemplater.Model.Config> adapter =
+			       TableAdapter<CodeTemplater.Model.Config>.Open())
+			{
+				foreach (CodeTemplater.Model.Config item in adapter.Select().Where(t=> t.Type == 1)) {
+					if (item.Name.Equals("filepath")) {
+						if (item.Value == null)
+							continue;
+						foreach(string val in item.Value.Split(';')) {
+							tcmbFilePath.Items.Add(val);
+						}
+					} else if (item.Name.Equals("filename_template")) {
+						if (item.Value == null)
+							continue;
+						foreach(string val in item.Value.Split(';')) {
+							tcmbFilenameTemplate.Items.Add(val);
+						}
+					}
+				}
+			}
+		}
+		
+		protected void runTemplate()
 		{
 			string dataStr = txtData.Text;
 			string colSep = txtColumnSpliter.Text;
 			string scripts = txtScript.Text;
 			
 			try {
-				
 				string[][] rows = DataParser.parseCvs(dataStr, colSep);
 				txtResult.Text = TemplateParser.run(rows, scripts);
 				tabControl1.SelectedIndex = 2;
-			} catch (Exception ex)
-			{
+			} catch (Exception ex) {
 				MessageBox.Show(ex.StackTrace, ex.Message);
 			}
-			
-			
+		}
+		
+		void TbtnRunTemplateClick(object sender, EventArgs e)
+		{
+			runTemplate();
 		}
 		
 		void TbtnScriptSaveClick(object sender, System.EventArgs e)
@@ -189,6 +214,80 @@ namespace CodeTemplater
 			dataGridView1.Columns.Clear();
 			
 			fillDataGridView(dataGridView1, rows);
+		}
+		
+		void TbtnScriptRunClick(object sender, EventArgs e)
+		{
+			runTemplate();
+		}
+		
+		void TbtnGenerateFileClick(object sender, EventArgs e)
+		{
+			string filenameTemplate = tcmbFilenameTemplate.Text;
+			string dataStr = txtData.Text;
+			string colSep = txtColumnSpliter.Text;
+			string scripts = txtScript.Text;
+			string filepath = tcmbFilePath.Text;
+			string content;
+			string filename;
+			
+			// 保存路径和文件名模板
+			if (!tcmbFilePath.Items.Contains(filepath)) {
+				tcmbFilePath.Items.Add(filepath);
+			}
+			if (!tcmbFilenameTemplate.Items.Contains(filenameTemplate)) {
+				tcmbFilenameTemplate.Items.Add(filenameTemplate);
+			}
+			
+			// 生成多文件
+			if (filepath.Length > 0 && filepath[filepath.Length - 1] != '\\')
+				filepath += '\\';
+			try {
+				string[][] rows = DataParser.parseCvs(dataStr, colSep);
+				foreach (string[] row in rows) {
+					content = TemplateParser.runRow(row, scripts);
+					filename = TemplateParser.runRow(row, filenameTemplate);
+					CommonLang.TextFileHelper.writeAll(filepath + filename, content, System.Text.Encoding.UTF8);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(ex.StackTrace, ex.Message);
+			}
+		}
+		
+		protected string getToolStripComboValues(ToolStripComboBox tcmb)
+		{
+			string[] items = new String[tcmb.Items.Count];
+			for (int i = 0; i < tcmb.Items.Count; i++) {
+				items[i] = (string)tcmb.Items[i];
+			}
+			return CommonLang.ArrayHelper<string>.join(items, ";");
+		}
+		
+		protected void saveConfigCombos()
+		{
+			string filepaths = getToolStripComboValues(tcmbFilePath);
+			string filenameTemplates = getToolStripComboValues(tcmbFilenameTemplate);
+			
+			using (TableAdapter<CodeTemplater.Model.Config> adapter =
+			       TableAdapter<CodeTemplater.Model.Config>.Open())
+			{
+				foreach (CodeTemplater.Model.Config item in adapter.Select().Where(t=> t.Type == 1)) {
+					if (item.Name.Equals("filepath")) {
+						item.Value = filepaths;
+						item.Save();
+					} else if (item.Name.Equals("filename_template")) {
+						item.Value = filenameTemplates;
+						item.Save();
+					}
+				}
+			}
+			
+			
+		}
+		
+		void MainFormFormClosing(object sender, FormClosingEventArgs e)
+		{
+			saveConfigCombos();
 		}
 	}
 }

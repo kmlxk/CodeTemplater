@@ -57,7 +57,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Script.cs" />
-    <Compile Include="Model\SimpleTable.cs" />
+    <Compile Include="Model\Config.cs" />
     <Compile Include="Model\TableBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +80,10 @@
     <Folder Include="Model" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonLang\CommonLang\CommonLang.csproj">
+      <Project>{EE91293B-2731-4D7F-8BB1-C8F8405F06AC}</Project>
+      <Name>CommonLang</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeTemplaterLib\CodeTemplaterLib.csproj">
       <Project>{27047A97-FD88-40E3-971D-F49537097ACA}</Project>
       <Name>CodeTemplaterLib</Name>

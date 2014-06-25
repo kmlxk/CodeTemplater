@@ -11,15 +11,19 @@ using SqliteORM;
 namespace CodeTemplater.Model
 {
 	[Table]
-	public class SimpleTable : TableBase<SimpleTable>
+	public class Config : TableBase<Config>
 	{
 		[PrimaryKey]
 		public long Id { get; set; }
 
 		[Field]
-		public string Test { get; set; }
+		public long Type { get; set; }
 
 		[Field]
-		public DateTime When { get; set; }
+		public string Name { get; set; }
+
+		[Field]
+		public string Value { get; set; }
+
 	}
 }
